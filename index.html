@@ -109,10 +109,18 @@
       .calculate-button:hover {
         background-color: #138496;
       }
+      .clock {
+            font-size: 2em;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            text-align: center;
+            margin-top: 0%;
+        }
     </style>
   </head>
   <body>
     <div class="container">
+    <div class="clock" id="clock"></div>
       <h1>灿灿小香肥肥臭臭🐏的商品性价比计算器</h1>
       <div id="products">
         <div class="product">
@@ -171,6 +179,24 @@
 
       <div class="result" id="result"></div>
     </div>
+
+
+<script>
+        function updateClock() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const timeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            document.getElementById('clock').textContent = timeString;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call to display the clock immediately
+    </script>
 
     <script>
       var productCount = 2;
