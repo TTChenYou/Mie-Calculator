@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>灿灿小香肥肥臭臭🐏的商品性价比计算器</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       body {
@@ -110,7 +111,7 @@
   </head>
   <body>
     <div class="container">
-      <h1>小香灿灿肥肥臭臭🐏的商品性价比计算器</h1>
+      <h1>灿灿小香肥肥臭臭🐏的商品性价比计算器</h1>
       <div id="products">
         <div class="product">
           <h2>商品 A</h2>
@@ -124,7 +125,7 @@
             inputmode="decimal"
           />
 
-          <label>商品重量 (克/毫升)</label>
+          <label>商品重量 (1克or1毫升)</label>
           <input
             type="number"
             class="weight"
@@ -149,7 +150,7 @@
             inputmode="decimal"
           />
 
-          <label>商品重量 (克/毫升)</label>
+          <label>商品重量 (1克or1毫升)</label>
           <input
             type="number"
             class="weight"
@@ -185,7 +186,7 @@
                 <label>商品价格 (円)</label>
                 <input type="number" class="price" min="0" step="0.01" placeholder="输入商品价格" inputmode="decimal">
         
-                <label>商品重量 (克/毫升)</label>
+                <label>商品重量 (1克or1毫升)</label>
                 <input type="number" class="weight" min="0" step="0.01" placeholder="输入商品重量" inputmode="decimal">
                 <button class="remove-button" onclick="removeProduct(this)">删除</button>
             `;
@@ -250,12 +251,12 @@
             (result) => `
                 <p>商品${
                   result.label
-                }每买克/毫升，肥肥🐏要花掉：${result.costPerGram.toFixed(
+                }每买1克or1毫升，肥肥🐏要支付：${result.costPerGram.toFixed(
               2
             )} 円</p>
                 <p>商品${
                   result.label
-                }每花1円，肥肥🐏可以买到：${result.weightPerYuan.toFixed(
+                }每支付1円，肥肥🐏可以买到：${result.weightPerYuan.toFixed(
               2
             )} 克/毫升的此商品</p>
             `
