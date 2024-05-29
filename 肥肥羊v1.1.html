@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>灿灿小香肥肥臭臭🐏的商品性价比计算器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f2f5;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        width: 100%;
+        max-width: 600px;
+        padding: 20px;
+        margin: 20px;
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+        font-size: 1.5em;
+      }
+      label {
+        display: block;
+        margin: 10px 0 5px;
+        color: #555;
+        font-size: 1.2em;
+      }
+      input[type="number"] {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 1.2em;
+      }
+      button {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: white;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .result {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        font-size: 1.2em;
+      }
+      .highlight {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: red;
+        text-align: center;
+      }
+      .product {
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        position: relative;
+      }
+      .remove-button {
+        background-color: red;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        margin-top: 10px;
+        width: calc(100% - 20px);
+        border-radius: 4px;
+        font-size: 1.2em;
+      }
+      .product h2 {
+        margin: 0 0 10px;
+        color: #333;
+        font-size: 1.3em;
+      }
+      .add-button {
+        margin-top: 20px;
+        background-color: #28a745;
+      }
+      .add-button:hover {
+        background-color: #218838;
+      }
+      .calculate-button {
+        background-color: #17a2b8;
+      }
+      .calculate-button:hover {
+        background-color: #138496;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>小香灿灿肥肥臭臭🐏的商品性价比计算器</h1>
+      <div id="products">
+        <div class="product">
+          <h2>商品 A</h2>
+          <label>商品价格 (円)</label>
+          <input
+            type="number"
+            class="price"
+            min="0"
+            step="0.01"
+            placeholder="输入商品价格"
+            inputmode="decimal"
+          />
+
+          <label>商品重量 (克/毫升)</label>
+          <input
+            type="number"
+            class="weight"
+            min="0"
+            step="0.01"
+            placeholder="输入商品重量"
+            inputmode="decimal"
+          />
+          <button class="remove-button" onclick="removeProduct(this)">
+            删除
+          </button>
+        </div>
+        <div class="product">
+          <h2>商品 B</h2>
+          <label>商品价格 (円)</label>
+          <input
+            type="number"
+            class="price"
+            min="0"
+            step="0.01"
+            placeholder="输入商品价格"
+            inputmode="decimal"
+          />
+
+          <label>商品重量 (克/毫升)</label>
+          <input
+            type="number"
+            class="weight"
+            min="0"
+            step="0.01"
+            placeholder="输入商品重量"
+            inputmode="decimal"
+          />
+          <button class="remove-button" onclick="removeProduct(this)">
+            删除
+          </button>
+        </div>
+      </div>
+      <button class="add-button" onclick="addProduct()">添加商品</button>
+      <button class="calculate-button" onclick="calculate()">计算</button>
+
+      <div class="result" id="result"></div>
+    </div>
+
+    <script>
+      var productCount = 2;
+      var productLabels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+      function addProduct() {
+        if (productCount >= productLabels.length) {
+          alert("已达到最大商品数量");
+          return;
+        }
+        var productDiv = document.createElement("div");
+        productDiv.className = "product";
+        productDiv.innerHTML = `
+                <h2>商品 ${productLabels[productCount]}</h2>
+                <label>商品价格 (円)</label>
+                <input type="number" class="price" min="0" step="0.01" placeholder="输入商品价格" inputmode="decimal">
+        
+                <label>商品重量 (克/毫升)</label>
+                <input type="number" class="weight" min="0" step="0.01" placeholder="输入商品重量" inputmode="decimal">
+                <button class="remove-button" onclick="removeProduct(this)">删除</button>
+            `;
+        document.getElementById("products").appendChild(productDiv);
+        productCount++;
+        updateRemoveButtons();
+      }
+
+      function removeProduct(button) {
+        var productDiv = button.parentElement;
+        productDiv.parentElement.removeChild(productDiv);
+        productCount--;
+        updateProductLabels();
+        updateRemoveButtons();
+      }
+
+      function updateProductLabels() {
+        var products = document.querySelectorAll(".product");
+        products.forEach((product, index) => {
+          product.querySelector(
+            "h2"
+          ).textContent = `商品 ${productLabels[index]}`;
+        });
+      }
+
+      function updateRemoveButtons() {
+        var removeButtons = document.querySelectorAll(".remove-button");
+        removeButtons.forEach((button) => {
+          button.style.display = productCount > 2 ? "block" : "none";
+        });
+      }
+
+      function calculate() {
+        var prices = document.querySelectorAll(".price");
+        var weights = document.querySelectorAll(".weight");
+
+        var results = [];
+        for (var i = 0; i < prices.length; i++) {
+          var price = parseFloat(prices[i].value);
+          var weight = parseFloat(weights[i].value);
+
+          if (isNaN(price) || isNaN(weight) || weight <= 0) {
+            alert("请输入有效的价格和重量");
+            return;
+          }
+
+          var costPerGram = price / weight;
+          var weightPerYuan = weight / price;
+
+          results.push({
+            index: i,
+            label: productLabels[i],
+            costPerGram: costPerGram,
+            weightPerYuan: weightPerYuan,
+          });
+        }
+
+        results.sort((a, b) => a.costPerGram - b.costPerGram);
+
+        var resultHTML = results
+          .map(
+            (result) => `
+                <p>商品${
+                  result.label
+                }每买克/毫升，肥肥🐏要花掉：${result.costPerGram.toFixed(
+              2
+            )} 円</p>
+                <p>商品${
+                  result.label
+                }每花1円，肥肥🐏可以买到：${result.weightPerYuan.toFixed(
+              2
+            )} 克/毫升的此商品</p>
+            `
+          )
+          .join("");
+
+        if (
+          results.length > 1 &&
+          results[0].costPerGram === results[1].costPerGram
+        ) {
+          resultHTML += `<p class="highlight">两个商品性价比一样，肥肥🐏买哪个都可以。</p>`;
+        } else {
+          resultHTML += `<p class="highlight">最划算的是商品${results[0].label}，肥肥🐏买就完事了。</p>`;
+        }
+
+        document.getElementById("result").innerHTML = resultHTML;
+      }
+
+      // Initial call to update remove buttons visibility
+      updateRemoveButtons();
+    </script>
+  </body>
+</html>
