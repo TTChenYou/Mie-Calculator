@@ -92,16 +92,8 @@ function calculate() {
   var resultHTML = results
     .map(
       (result) => `
-          <p>商品${
-            result.label
-          }每买1克or1毫升or1个，肥肥🐏要支付：${result.costPerGram.toFixed(
-        2
-      )} 円</p>
-          <p>商品${
-            result.label
-          }每支付1円，肥肥🐏可以买到：${result.weightPerYuan.toFixed(
-        2
-      )} 克/毫升的此商品</p>
+          <p>商品${result.label}每买1克or1毫升or1个，肥肥🐏要支付：${result.costPerGram.toFixed(2)} 円</p>
+          <p>商品${result.label}每支付1円，肥肥🐏可以买到：${result.weightPerYuan.toFixed(2)} 克/毫升的此商品</p>
         `
     )
     .join("");
@@ -113,6 +105,16 @@ function calculate() {
   }
 
   document.getElementById("result").innerHTML = resultHTML;
+}
+
+function clearForm() {
+  var prices = document.querySelectorAll(".price");
+  var weights = document.querySelectorAll(".weight");
+
+  prices.forEach(price => price.value = '');
+  weights.forEach(weight => weight.value = '');
+
+  document.getElementById("result").innerHTML = '';
 }
 
 // Initial call to update remove buttons visibility

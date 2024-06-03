@@ -17,64 +17,33 @@
         <div class="product">
           <div class="product-header">
             <h2>商品 A</h2>
-            <button class="remove-button" onclick="removeProduct(this)">
-              删除
-            </button>
+            <button class="remove-button" onclick="removeProduct(this)">删除</button>
           </div>
           <div class="product-details">
             <label>商品价格 (円)</label>
-            <input
-              type="number"
-              class="price"
-              min="0"
-              step="0.01"
-              placeholder="输入商品价格"
-              inputmode="decimal"
-            />
+            <input type="number" class="price" min="0" step="0.01" placeholder="输入商品价格" inputmode="decimal" />
             <label>商品重量 (克or毫升or个数)</label>
-            <input
-              type="number"
-              class="weight"
-              min="0"
-              step="0.01"
-              placeholder="输入商品重量"
-              inputmode="decimal"
-            />
+            <input type="number" class="weight" min="0" step="0.01" placeholder="输入商品重量" inputmode="decimal" />
           </div>
         </div>
         <div class="product">
           <div class="product-header">
             <h2>商品 B</h2>
-            <button class="remove-button" onclick="removeProduct(this)">
-              删除
-            </button>
+            <button class="remove-button" onclick="removeProduct(this)">删除</button>
           </div>
           <div class="product-details">
             <label>商品价格 (円)</label>
-            <input
-              type="number"
-              class="price"
-              min="0"
-              step="0.01"
-              placeholder="输入商品价格"
-              inputmode="decimal"
-            />
+            <input type="number" class="price" min="0" step="0.01" placeholder="输入商品价格" inputmode="decimal" />
             <label>商品重量 (克or毫升or个数)</label>
-            <input
-              type="number"
-              class="weight"
-              min="0"
-              step="0.01"
-              placeholder="输入商品重量"
-              inputmode="decimal"
-            />
+            <input type="number" class="weight" min="0" step="0.01" placeholder="输入商品重量" inputmode="decimal" />
           </div>
         </div>
       </div>
       <button class="add-button" onclick="addProduct()">添加商品</button>
-      <button class="calculate-button" onclick="calculate()">计算</button>
+      <button class="calculate-button" onclick="calculate()">计算结果</button>
+      <button class="clear-button" onclick="clearForm()">清除表单</button>
       <div class="result" id="result"></div>
-      <p>2024年6月1日 V1.3</p>
+      <p>2024年6月3日 V1.4</p>
     </div>
     <script src="scripts.js"></script>
   </body>
