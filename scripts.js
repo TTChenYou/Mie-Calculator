@@ -1,4 +1,4 @@
-function updateClock() {
+function updateClock () {
   const now = new Date();
   const year = now.getFullYear();
   const month = String(now.getMonth() + 1).padStart(2, "0"); // Months are 0-based
@@ -16,9 +16,9 @@ updateClock(); // Initial call to display the clock immediately
 var productCount = 2;
 var productLabels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-function addProduct() {
+function addProduct () {
   if (productCount >= productLabels.length) {
-    alert("已达到最大商品数量");
+    alert("你是猪？选这么多吃蛇皮");
     return;
   }
   var productDiv = document.createElement("div");
@@ -40,7 +40,7 @@ function addProduct() {
   updateRemoveButtons();
 }
 
-function removeProduct(button) {
+function removeProduct (button) {
   var productDiv = button.closest(".product");
   productDiv.parentElement.removeChild(productDiv);
   productCount--;
@@ -48,21 +48,21 @@ function removeProduct(button) {
   updateRemoveButtons();
 }
 
-function updateProductLabels() {
+function updateProductLabels () {
   var products = document.querySelectorAll(".product");
   products.forEach((product, index) => {
     product.querySelector("h2").textContent = `商品 ${productLabels[index]}`;
   });
 }
 
-function updateRemoveButtons() {
+function updateRemoveButtons () {
   var removeButtons = document.querySelectorAll(".remove-button");
   removeButtons.forEach((button) => {
     button.style.display = productCount > 2 ? "block" : "none";
   });
 }
 
-function calculate() {
+function calculate () {
   var prices = document.querySelectorAll(".price");
   var weights = document.querySelectorAll(".weight");
 
@@ -89,25 +89,36 @@ function calculate() {
 
   results.sort((a, b) => a.costPerGram - b.costPerGram);
 
-  var resultHTML = results
+  var resultHTML = "";
+
+  if (results.length > 1) {
+    resultHTML += `<p class="highlight">最划算的是商品${results[0].label}<br>排第2的是商品${results[1].label}`;
+    if (results.length > 2) {
+      for (var i = 2; i < results.length - 1; i++) {
+        resultHTML += `，<br>排第${i + 1}的是商品${results[i].label}`;
+      }
+      resultHTML += `，<br>排倒数第2的是商品${results[results.length - 2].label}<br>最冤种的是商品${results[results.length - 1].label}</p>`;
+    } else {
+      resultHTML += `，<br>最冤种的是商品${results[1].label}</p>`;
+    }
+  } else {
+    resultHTML += `<p class="highlight">最划算的是商品${results[0].label}</p>`;
+  }
+
+  resultHTML += results
     .map(
       (result) => `
-          <p>商品${result.label}每买1克or1毫升or1个，肥肥🐏要支付：${result.costPerGram.toFixed(2)} 円</p>
-          <p>商品${result.label}每支付1円，肥肥🐏可以买到：${result.weightPerYuan.toFixed(2)} 克/毫升的此商品</p>
+          <p>商品${result.label}每买1克/毫升/个，肥肥🐏要支付${result.costPerGram.toFixed(2)} 円</p>
+          <p>商品${result.label}每支付1円，肥肥🐏可以买到${result.weightPerYuan.toFixed(2)} 克/毫升/个此商品</p>
         `
     )
     .join("");
 
-  if (results.length > 1 && results[0].costPerGram === results[1].costPerGram) {
-    resultHTML += `<p class="highlight">两个商品性价比一样，肥肥🐏买哪个都可以。</p>`;
-  } else {
-    resultHTML += `<p class="highlight">最划算的是商品${results[0].label}，肥肥🐏买就完事了。</p>`;
-  }
-
   document.getElementById("result").innerHTML = resultHTML;
 }
 
-function clearForm() {
+
+function clearForm () {
   var prices = document.querySelectorAll(".price");
   var weights = document.querySelectorAll(".weight");
 
