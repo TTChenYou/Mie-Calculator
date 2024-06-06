@@ -131,3 +131,16 @@ button:hover {
   text-align: center;
   margin-top: 0%;
 }
+
+.ai-button {
+  width: auto;
+  padding: 5px 10px;
+  margin-right: 10px;
+}
+
+.top-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1px;
+}
