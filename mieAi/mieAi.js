@@ -1,5 +1,11 @@
 let responseCount = 0;
 
+function handleKeyDown(event) {
+  if (event.key === 'Enter') {
+    sendMessage();
+  }
+}
+
 function sendMessage() {
   const chatBox = document.getElementById('chat-box');
   const userInput = document.getElementById('user-input');
@@ -74,5 +80,5 @@ function sendMessage() {
 
     // Scroll to the bottom of the chat box again
     chatBox.scrollTop = chatBox.scrollHeight;
-  }, Math.random() * 500 + 1000); // 1-2 seconds delay
+  }, Math.random() * 1000 + 1000); // 1-2 seconds delay
 }

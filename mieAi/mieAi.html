@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <title>肥羊AI(测试版)</title>
   <link rel="icon" href="./favicon.ico" type="image/x-icon" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <link rel="stylesheet" href="./mieAi.css" />
 </head>
 
@@ -15,7 +15,7 @@
     <div class="chat-container">
       <div id="chat-box" class="chat-box"></div>
       <div class="input-container">
-        <input type="text" id="user-input" placeholder="输入内容..." />
+        <input type="text" id="user-input" placeholder="输入内容..." onkeydown="handleKeyDown(event)" />
         <button class="send-button" onclick="sendMessage()">发送</button>
       </div>
     </div>
