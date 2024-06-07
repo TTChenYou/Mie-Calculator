@@ -132,5 +132,5 @@ function clearForm () {
 updateRemoveButtons();
 
 function eatTest() {
-  alert('肥羊吃啥功能正在开发中，敬请期待！');
+  alert('肥羊吃啥功能正在开发中，敬请期待！(吃屁吧你)');
 }
