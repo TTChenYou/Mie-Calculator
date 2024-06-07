@@ -130,3 +130,7 @@ function clearForm () {
 
 // Initial call to update remove buttons visibility
 updateRemoveButtons();
+
+function eatTest() {
+  alert('肥羊吃啥功能正在开发中，敬请期待！');
+}
