@@ -1,0 +1,108 @@
+body {
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  background-color: #fafafa;
+  padding: 50px;
+  margin: 0;
+}
+
+h1 {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+#food-display {
+  font-size: 24px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid #333;
+  display: inline-block;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  word-wrap: break-word;
+}
+
+textarea {
+  font-size: 18px;
+  padding: 10px;
+  width: 600px;
+  height: 100px;
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+}
+
+button {
+  font-size: 18px;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #007BFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.control-container {
+  margin-top: 20px;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  body {
+      padding: 20px;
+  }
+
+  h1 {
+      font-size: 28px;
+  }
+
+  textarea {
+      font-size: 16px;
+      padding: 8px;
+      width: 90%;
+      height: 80px;
+  }
+
+  button {
+      font-size: 16px;
+      padding: 8px 16px;
+  }
+
+  #food-display {
+      font-size: 20px;
+      padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+      font-size: 24px;
+  }
+
+  textarea {
+      font-size: 14px;
+      padding: 6px;
+      width: 90%;
+      height: 60px;
+  }
+
+  button {
+      font-size: 14px;
+      padding: 6px 12px;
+  }
+
+  #food-display {
+      font-size: 18px;
+      padding: 10px;
+  }
+}
