@@ -13,10 +13,27 @@
     <button class="ai-button" onclick="location.href='../index.html'">比价</button>
     <button class="ai-button" onclick="location.href='../mieAi/mieAi.html'">聊天</button>
   </div>
-  <div id="game-board"></div>
   <div class="controls">
-    <button onclick="restartGame()">重新开始</button>
+    <div>
+      <label><input type="radio" name="mode" value="countup" checked> 正计时</label>
+      <label><input type="radio" name="mode" value="countdown"> 倒计时（60秒）</label>
+    </div>
+    <button onclick="startGame()">开始游戏</button>
+    <button onclick="setDifficulty(4)">初级</button>
+    <button onclick="setDifficulty(6)">中级</button>
+    <button onclick="setDifficulty(8)">高级</button>
+    <button onclick="setDifficulty(10)">大师</button>
+    <button onclick="setDifficulty(12)">地狱</button>
+    <button onclick="setCustomSize()">自定义</button>
+    <button onclick="confirmRestart()">重新开始</button>
   </div>
+  
+  <div id="status">
+    ⏱ 时间：<span id="timer">0</span> 秒 ｜ 👆 点击：<span id="clicks">0</span>
+  </div>
+
+  <div id="game-board"></div>
+
   <script src="lianliankan.js"></script>
 </body>
 </html>
