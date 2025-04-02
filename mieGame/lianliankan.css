@@ -1,0 +1,103 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(6, 60px); /* 每行6个格子，60px更适合手机 */
+  grid-gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tile {
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 8px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.tile:hover {
+  background-color: #e0f7fa;
+  transform: scale(1.05);
+}
+
+.tile.selected {
+  background-color: #c8e6c9;
+  border-color: #388e3c;
+}
+
+.controls {
+  margin-top: 20px;
+}
+
+button {
+  font-size: 1.4rem;
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  #game-board {
+    grid-template-columns: repeat(6, 50px);
+  }
+
+  .tile {
+    width: 50px;
+    height: 50px;
+    font-size: 1.8rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  button {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  #game-board {
+    grid-template-columns: repeat(6, 44px);
+    grid-gap: 8px;
+  }
+
+  .tile {
+    width: 44px;
+    height: 44px;
+    font-size: 1.6rem;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}
