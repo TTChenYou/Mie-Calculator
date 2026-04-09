@@ -16,18 +16,82 @@ updateClock();
 var productCount = 2;
 var productLabels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-// 【新增】安全计算数学表达式的函数
+// 安全计算数学表达式
 function evalMath(expression) {
   if (!expression) return NaN;
   try {
-    // 过滤掉非法字符，只保留数字和数学符号，防止恶意代码注入
     const sanitized = expression.replace(/[^-()\d/*+.]/g, '');
-    // 计算表达式结果
     return new Function('return ' + sanitized)();
   } catch (e) {
     return NaN;
   }
 }
+
+// ==== 自定义键盘逻辑开始 ====
+let activeInput = null;
+
+function bindKeyboardToInput(inputElement) {
+  inputElement.addEventListener('click', (e) => {
+    e.stopPropagation();
+    // 移除其他输入框的高亮状态
+    document.querySelectorAll('.price, .weight').forEach(el => el.classList.remove('active-input'));
+    // 激活当前输入框
+    activeInput = inputElement;
+    activeInput.classList.add('active-input');
+    // 弹出键盘
+    document.getElementById('custom-keyboard').classList.add('show');
+  });
+}
+
+function initKeyboard() {
+  // 绑定初始的输入框
+  document.querySelectorAll('.price, .weight').forEach(bindKeyboardToInput);
+
+  // 绑定键盘按键事件
+  document.querySelectorAll('.kb-key').forEach(key => {
+    key.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!activeInput) return;
+      
+      const val = e.target.getAttribute('data-val');
+      let currentVal = activeInput.value;
+
+      if (val === 'DEL') {
+        activeInput.value = currentVal.slice(0, -1);
+      } else if (val === 'C') {
+        activeInput.value = '';
+      } else if (val === 'OK') {
+        // 点击确认时，如果是个公式，直接帮用户算出来
+        const result = evalMath(currentVal);
+        if (!isNaN(result) && currentVal !== '') {
+            activeInput.value = result;
+        }
+        hideKeyboard();
+      } else {
+        activeInput.value += val;
+      }
+    });
+  });
+
+  // 点击页面空白处隐藏键盘
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#custom-keyboard') && !e.target.classList.contains('price') && !e.target.classList.contains('weight')) {
+      hideKeyboard();
+    }
+  });
+}
+
+function hideKeyboard() {
+  document.getElementById('custom-keyboard').classList.remove('show');
+  if (activeInput) {
+    activeInput.classList.remove('active-input');
+    activeInput = null;
+  }
+}
+
+// 页面加载完成后初始化键盘
+document.addEventListener('DOMContentLoaded', initKeyboard);
+// ==== 自定义键盘逻辑结束 ====
 
 function addProduct() {
   if (productCount >= productLabels.length) {
@@ -36,7 +100,6 @@ function addProduct() {
   }
   var productDiv = document.createElement("div");
   productDiv.className = "product";
-  // 注意：这里的 input type 也改成了 text
   productDiv.innerHTML = `
       <div class="product-header">
         <h2>商品 ${productLabels[productCount]}</h2>
@@ -44,12 +107,17 @@ function addProduct() {
       </div>
       <div class="product-details">
         <label>商品价格 (円)</label>
-        <input type="text" class="price" placeholder="例如: 500 或 100*5">
+        <input type="text" class="price" readonly placeholder="点击输入 (例如 500或10*5)">
         <label>商品重量 (克/毫升/个)</label>
-        <input type="text" class="weight" placeholder="例如: 250 或 50*5">
+        <input type="text" class="weight" readonly placeholder="点击输入 (例如 250或50*5)">
       </div>
     `;
   document.getElementById("products").appendChild(productDiv);
+  
+  // 给新生成的输入框绑定键盘
+  bindKeyboardToInput(productDiv.querySelector('.price'));
+  bindKeyboardToInput(productDiv.querySelector('.weight'));
+
   productCount++;
   updateRemoveButtons();
 }
@@ -60,6 +128,7 @@ function removeProduct(button) {
   productCount--;
   updateProductLabels();
   updateRemoveButtons();
+  hideKeyboard(); // 删除商品时顺便收起键盘
 }
 
 function updateProductLabels() {
@@ -77,12 +146,12 @@ function updateRemoveButtons() {
 }
 
 function calculate() {
+  hideKeyboard(); // 计算时收起键盘
   var prices = document.querySelectorAll(".price");
   var weights = document.querySelectorAll(".weight");
 
   var results = [];
   for (var i = 0; i < prices.length; i++) {
-    // 【修改】用 evalMath 代替 parseFloat
     var price = evalMath(prices[i].value);
     var weight = evalMath(weights[i].value);
 
@@ -138,16 +207,10 @@ function calculate() {
 function clearForm() {
   var prices = document.querySelectorAll(".price");
   var weights = document.querySelectorAll(".weight");
-
   prices.forEach(price => price.value = '');
   weights.forEach(weight => weight.value = '');
-
   document.getElementById("result").innerHTML = '';
+  hideKeyboard();
 }
 
-// Initial call
 updateRemoveButtons();
-
-function eatTest() {
-  alert('肥羊吃啥功能正在开发中，敬请期待！(吃屁吧你)');
-}
