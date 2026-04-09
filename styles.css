@@ -1,146 +1,223 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f2f5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   margin: 0;
   padding: 20px;
   display: flex;
   justify-content: center;
+  min-height: 100vh;
 }
 
 .container {
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
   width: 100%;
-  max-width: 600px;
-  padding: 20px;
-  margin: 20px;
+  max-width: 500px;
+  padding: 30px 20px;
+  box-sizing: border-box;
 }
 
 h1 {
   text-align: center;
-  color: #333;
-  font-size: 1.7em;
-}
-
-p {
-  text-align: center;
-  color: #333;
-  font-size: 14px;
-}
-
-label {
-  display: block;
-  margin: 10px 0 5px;
-  color: #555;
-  font-size: 1.2em;
-}
-
-input[type="number"] {
-  width: 100%;
-  padding: 15px;
+  color: #2c3e50;
+  font-size: 1.8em;
+  margin-top: 5px;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 1.2em;
 }
 
-button {
-  width: 100%;
-  padding: 15px;
+.clock {
+  font-size: 0.9em;
+  color: #7f8c8d;
+  text-align: center;
   margin-bottom: 10px;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: white;
-  font-size: 1.2em;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  letter-spacing: 1px;
 }
 
-button:hover {
-  background-color: #0056b3;
+/* 顶部导航按钮组 */
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ecf0f1;
+  padding: 5px;
+  border-radius: 12px;
+  margin-bottom: 25px;
 }
 
-.result {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
-  font-size: 1.0em;
-}
-
-.highlight {
-  font-size: 1.5em;
+.nav-btn {
+  flex: 1;
+  padding: 10px 0;
+  margin: 0 2px;
+  background-color: transparent;
+  color: #7f8c8d;
+  border-radius: 8px;
+  font-size: 1em;
   font-weight: bold;
-  color: red;
-  text-align: center;
 }
 
+.nav-btn.active {
+  background-color: #fff;
+  color: #3498db;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.nav-btn:hover:not(.active) {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #34495e;
+}
+
+/* 商品卡片设计 */
 .product {
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 10px;
+  background: #fff;
+  border: 1px solid #e1e8ed;
+  border-radius: 12px;
+  padding: 15px;
   margin-bottom: 20px;
-  position: relative;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  transition: all 0.3s ease;
+}
+
+.product:hover {
+  border-color: #bdc3c7;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .product-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px dashed #ecf0f1;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
 }
 
-.product-details {
-  margin-top: 10px;
+.product-header h2 {
+  margin: 0;
+  font-size: 1.2em;
+  color: #34495e;
 }
 
 .remove-button {
-  background-color: red;
-  color: white;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 4px;
-  font-size: 1.2em;
+  background-color: #fff0f0;
+  color: #e74c3c;
+  border: 1px solid #ffdcdc;
+  padding: 6px 12px;
+  font-size: 0.9em;
   width: auto;
+  margin: 0;
+}
+
+.remove-button:hover {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+/* 输入框区域 */
+label {
+  display: block;
+  margin: 0 0 8px;
+  color: #7f8c8d;
+  font-size: 0.95em;
+  font-weight: 500;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  background-color: #f8f9fa;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 1.1em;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #3498db;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+/* 底部操作按钮 */
+.action-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.2s, background-color 0.3s;
+}
+
+button:active {
+  transform: scale(0.98);
 }
 
 .add-button {
-  margin-top: 20px;
-  background-color: #28a745;
+  background-color: #f1f2f6;
+  color: #2ed573;
+  border: 2px dashed #2ed573;
 }
+.add-button:hover { background-color: #e0f6e9; }
 
-.add-button:hover {
-  background-color: #218838;
+.calculate-button {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
 }
+.calculate-button:hover { box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6); }
 
 .clear-button {
-  background-color: #17a2b8;
+  background-color: #ecf0f1;
+  color: #7f8c8d;
+}
+.clear-button:hover { background-color: #bdc3c7; color: #2c3e50; }
+
+/* 结果展示区 */
+.result {
+  margin-top: 25px;
 }
 
-.clear-button:hover {
-  background-color: #138496;
-}
-
-.clock {
-  font-size: 1em;
-  font-family: "Arial", sans-serif;
-  color: #333;
+.highlight {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #e67e22;
   text-align: center;
-  margin-top: 0%;
+  background: #fff3e0;
+  padding: 15px;
+  border-radius: 10px;
+  line-height: 1.6;
 }
 
-.ai-button {
-  width: auto;
-  padding: 5px 10px;
-  margin-right: 10px;
+.result-card {
+  background: #f8f9fa;
+  border-left: 4px solid #3498db;
+  padding: 12px 15px;
+  margin-top: 10px;
+  border-radius: 0 8px 8px 0;
 }
 
-.top-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1px;
+.result-card p {
+  margin: 5px 0 0;
+  font-size: 0.95em;
+  color: #555;
+  text-align: left;
+}
+
+.footer-text {
+  text-align: center;
+  color: #bdc3c7;
+  font-size: 12px;
+  margin-top: 30px;
 }
