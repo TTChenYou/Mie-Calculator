@@ -14,13 +14,14 @@
 <body>
   <div class="container">
     <div class="clock" id="clock"></div>
-    <h1>肥🐏比价</h1>
+    <h1>🐑 肥🐏比价</h1>
     <div class="top-section">
-      <button class="ai-button" onclick="location.href='./mieEat/mieEat.html'">吃啥</button>
-      <button class="ai-button" onclick="location.href='./mieGame/lianliankan.html'">游戏</button>
-      <button class="ai-button" onclick="location.href='./index.html'">比价</button>
-      <button class="ai-button" onclick="location.href='./mieAi/mieAi.html'">聊天</button>
+      <button class="ai-button nav-btn" onclick="location.href='./mieEat/mieEat.html'">吃啥</button>
+      <button class="ai-button nav-btn" onclick="location.href='./mieGame/lianliankan.html'">游戏</button>
+      <button class="ai-button nav-btn active" onclick="location.href='./index.html'">比价</button>
+      <button class="ai-button nav-btn" onclick="location.href='./mieAi/mieAi.html'">聊天</button>
     </div>
+    
     <div id="products">
       <div class="product">
         <div class="product-header">
@@ -29,11 +30,12 @@
         </div>
         <div class="product-details">
           <label>商品价格 (円)</label>
-          <input type="number" class="price" min="0" step="0.01" placeholder="输入商品价格" inputmode="decimal" />
-          <label>商品重量 (克or毫升or个数)</label>
-          <input type="number" class="weight" min="0" step="0.01" placeholder="输入商品重量" inputmode="decimal" />
+          <input type="text" class="price" placeholder="例如: 500 或 100*5" />
+          <label>商品重量 (克/毫升/个)</label>
+          <input type="text" class="weight" placeholder="例如: 250 或 50*5" />
         </div>
       </div>
+      
       <div class="product">
         <div class="product-header">
           <h2>商品 B</h2>
@@ -41,17 +43,21 @@
         </div>
         <div class="product-details">
           <label>商品价格 (円)</label>
-          <input type="number" class="price" min="0" step="0.01" placeholder="输入商品价格" inputmode="decimal" />
-          <label>商品重量 (克or毫升or个数)</label>
-          <input type="number" class="weight" min="0" step="0.01" placeholder="输入商品重量" inputmode="decimal" />
+          <input type="text" class="price" placeholder="例如: 500 或 100*5" />
+          <label>商品重量 (克/毫升/个)</label>
+          <input type="text" class="weight" placeholder="例如: 250 或 50*5" />
         </div>
       </div>
     </div>
-    <button class="add-button" onclick="addProduct()">添加商品</button>
-    <button class="calculate-button" onclick="calculate()">计算结果</button>
-    <button class="clear-button" onclick="clearForm()">清除表单</button>
+    
+    <div class="action-group">
+      <button class="add-button" onclick="addProduct()">➕ 添加商品</button>
+      <button class="calculate-button" onclick="calculate()">🚀 计算结果</button>
+      <button class="clear-button" onclick="clearForm()">🗑️ 清除表单</button>
+    </div>
+    
     <div class="result" id="result"></div>
-    <p>2024年6月6日 V1.6</p>
+    <p class="footer-text">2026年4月9日 V2.1 (支持计算)</p>
   </div>
   <script src="scripts.js"></script>
 </body>
