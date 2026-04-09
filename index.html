@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <title>肥🐏比价</title>
   <link rel="icon" href="./favicon.ico" type="image/x-icon" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <link rel="apple-touch-icon" href="./favicon.jpg" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <link rel="stylesheet" href="styles.css" />
@@ -30,9 +30,9 @@
         </div>
         <div class="product-details">
           <label>商品价格 (円)</label>
-          <input type="text" class="price" placeholder="例如: 500 或 100*5" />
+          <input type="text" class="price" readonly placeholder="点击输入 (例如 500或10*5)" />
           <label>商品重量 (克/毫升/个)</label>
-          <input type="text" class="weight" placeholder="例如: 250 或 50*5" />
+          <input type="text" class="weight" readonly placeholder="点击输入 (例如 250或50*5)" />
         </div>
       </div>
       
@@ -43,9 +43,9 @@
         </div>
         <div class="product-details">
           <label>商品价格 (円)</label>
-          <input type="text" class="price" placeholder="例如: 500 或 100*5" />
+          <input type="text" class="price" readonly placeholder="点击输入 (例如 500或10*5)" />
           <label>商品重量 (克/毫升/个)</label>
-          <input type="text" class="weight" placeholder="例如: 250 或 50*5" />
+          <input type="text" class="weight" readonly placeholder="点击输入 (例如 250或50*5)" />
         </div>
       </div>
     </div>
@@ -57,8 +57,40 @@
     </div>
     
     <div class="result" id="result"></div>
-    <p class="footer-text">2026年4月9日 V2.1 (支持计算)</p>
+    <p class="footer-text">2024年6月6日 V3.0 (专属计算器键盘版)</p>
   </div>
+
+  <div id="custom-keyboard" class="keyboard">
+    <div class="kb-row">
+      <div class="kb-key" data-val="7">7</div>
+      <div class="kb-key" data-val="8">8</div>
+      <div class="kb-key" data-val="9">9</div>
+      <div class="kb-key kb-op" data-val="/">÷</div>
+    </div>
+    <div class="kb-row">
+      <div class="kb-key" data-val="4">4</div>
+      <div class="kb-key" data-val="5">5</div>
+      <div class="kb-key" data-val="6">6</div>
+      <div class="kb-key kb-op" data-val="*">×</div>
+    </div>
+    <div class="kb-row">
+      <div class="kb-key" data-val="1">1</div>
+      <div class="kb-key" data-val="2">2</div>
+      <div class="kb-key" data-val="3">3</div>
+      <div class="kb-key kb-op" data-val="-">-</div>
+    </div>
+    <div class="kb-row">
+      <div class="kb-key" data-val="0">0</div>
+      <div class="kb-key" data-val=".">.</div>
+      <div class="kb-key kb-action" data-val="C">清空</div>
+      <div class="kb-key kb-op" data-val="+">+</div>
+    </div>
+    <div class="kb-row">
+      <div class="kb-key kb-del" data-val="DEL" style="flex: 1;">退格</div>
+      <div class="kb-key kb-confirm" data-val="OK" style="flex: 1;">确认 (计算)</div>
+    </div>
+  </div>
+
   <script src="scripts.js"></script>
 </body>
 
