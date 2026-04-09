@@ -1,11 +1,12 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   margin: 0;
-  padding: 20px;
+  padding: 15px;
   display: flex;
   justify-content: center;
   min-height: 100vh;
+  padding-bottom: 250px; /* 给底部键盘留出空间 */
 }
 
 .container {
@@ -14,7 +15,7 @@ body {
   border-radius: 16px;
   width: 100%;
   max-width: 500px;
-  padding: 30px 20px;
+  padding: 25px 15px;
   box-sizing: border-box;
 }
 
@@ -31,10 +32,8 @@ h1 {
   color: #7f8c8d;
   text-align: center;
   margin-bottom: 10px;
-  letter-spacing: 1px;
 }
 
-/* 顶部导航按钮组 */
 .top-section {
   display: flex;
   justify-content: space-between;
@@ -61,12 +60,6 @@ h1 {
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-.nav-btn:hover:not(.active) {
-  background-color: rgba(255, 255, 255, 0.5);
-  color: #34495e;
-}
-
-/* 商品卡片设计 */
 .product {
   background: #fff;
   border: 1px solid #e1e8ed;
@@ -74,12 +67,6 @@ h1 {
   padding: 15px;
   margin-bottom: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-  transition: all 0.3s ease;
-}
-
-.product:hover {
-  border-color: #bdc3c7;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .product-header {
@@ -102,17 +89,10 @@ h1 {
   color: #e74c3c;
   border: 1px solid #ffdcdc;
   padding: 6px 12px;
+  border-radius: 6px;
   font-size: 0.9em;
-  width: auto;
-  margin: 0;
 }
 
-.remove-button:hover {
-  background-color: #e74c3c;
-  color: #fff;
-}
-
-/* 输入框区域 */
 label {
   display: block;
   margin: 0 0 8px;
@@ -123,30 +103,23 @@ label {
 
 input[type="text"] {
   width: 100%;
-  padding: 12px 15px;
+  padding: 14px;
   margin-bottom: 15px;
   background-color: #f8f9fa;
   border: 2px solid transparent;
   border-radius: 8px;
   box-sizing: border-box;
-  font-size: 1.1em;
+  font-size: 1.2em;
   color: #2c3e50;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
-input[type="text"]:focus {
-  outline: none;
-  border-color: #3498db;
-  background-color: #fff;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-}
-
-/* 底部操作按钮 */
-.action-group {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 10px;
+/* 配合自定义键盘的高亮提示 */
+input.active-input {
+  border-color: #3498db !important;
+  background-color: #fff !important;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2) !important;
 }
 
 button {
@@ -157,43 +130,19 @@ button {
   font-size: 1.1em;
   font-weight: bold;
   cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.2s, background-color 0.3s;
+  margin-bottom: 10px;
 }
 
-button:active {
-  transform: scale(0.98);
-}
+.add-button { background-color: #f1f2f6; color: #2ed573; border: 2px dashed #2ed573; }
+.calculate-button { background: linear-gradient(135deg, #3498db, #2980b9); color: white; }
+.clear-button { background-color: #ecf0f1; color: #7f8c8d; }
 
-.add-button {
-  background-color: #f1f2f6;
-  color: #2ed573;
-  border: 2px dashed #2ed573;
-}
-.add-button:hover { background-color: #e0f6e9; }
-
-.calculate-button {
-  background: linear-gradient(135deg, #3498db, #2980b9);
-  color: white;
-  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
-}
-.calculate-button:hover { box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6); }
-
-.clear-button {
-  background-color: #ecf0f1;
-  color: #7f8c8d;
-}
-.clear-button:hover { background-color: #bdc3c7; color: #2c3e50; }
-
-/* 结果展示区 */
-.result {
-  margin-top: 25px;
-}
+.result { margin-top: 25px; }
 
 .highlight {
   font-size: 1.2em;
   font-weight: bold;
   color: #e67e22;
-  text-align: center;
   background: #fff3e0;
   padding: 15px;
   border-radius: 10px;
@@ -208,16 +157,69 @@ button:active {
   border-radius: 0 8px 8px 0;
 }
 
-.result-card p {
-  margin: 5px 0 0;
-  font-size: 0.95em;
-  color: #555;
-  text-align: left;
+/* ============================
+   自定义小键盘 CSS
+   ============================ */
+.keyboard {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #d1d5db;
+  padding: 10px;
+  padding-bottom: env(safe-area-inset-bottom, 15px); /* 适配iPhone底部黑条 */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1);
+  z-index: 1000;
+  box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
 }
 
-.footer-text {
-  text-align: center;
-  color: #bdc3c7;
-  font-size: 12px;
-  margin-top: 30px;
+.keyboard.show {
+  transform: translateY(0);
 }
+
+.kb-row {
+  display: flex;
+  gap: 8px;
+}
+
+.kb-key {
+  flex: 1;
+  background: #fff;
+  border-radius: 8px;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 1.6em;
+  font-weight: 500;
+  color: #333;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.kb-key:active {
+  background: #bcc3c9;
+}
+
+.kb-op {
+  background: #f39c12;
+  color: white;
+  font-weight: bold;
+}
+.kb-op:active { background: #e67e22; }
+
+.kb-action {
+  background: #95a5a6;
+  color: white;
+  font-size: 1.2em;
+}
+.kb-action:active { background: #7f8c8d; }
+
+.kb-del { background: #e74c3c; color: white; font-size: 1.2em; }
+.kb-del:active { background: #c0392b; }
+
+.kb-confirm { background: #27ae60; color: white; font-size: 1.2em; }
+.kb-confirm:active { background: #2ecc71; }
